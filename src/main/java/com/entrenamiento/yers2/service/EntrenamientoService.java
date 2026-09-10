@@ -1,6 +1,7 @@
 package com.entrenamiento.yers2.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -49,10 +50,6 @@ public class EntrenamientoService {
     response.setResultado(entrenamiento.getResultado());
     response.setFecha(entrenamiento.getFecha());
     return response;
-
-
-   
-
-   
 }
+
 }
