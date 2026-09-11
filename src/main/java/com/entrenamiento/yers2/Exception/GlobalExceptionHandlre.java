@@ -17,5 +17,12 @@ public class GlobalExceptionHandlre {
     public ResponseEntity<String>manejarJugadorDuplicado(JugadorDuplicadoException ex){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
+
+    @ExceptionHandler (InformacionInsuficienteException.class)
+    public ResponseEntity<String> manejarInformacionInsuficiente(InformacionInsuficienteException ex){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    
     
 }

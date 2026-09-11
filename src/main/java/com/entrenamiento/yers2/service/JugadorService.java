@@ -87,8 +87,8 @@ public class JugadorService {
 
         jugadoRepository.delete(jugador);
         return "jugador eliminado ";
-        
-
     }
+
+    
     
 }
