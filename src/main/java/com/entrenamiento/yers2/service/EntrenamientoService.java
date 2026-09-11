@@ -60,19 +60,30 @@ public class EntrenamientoService {
 
     public List<JugadoresTitularesDto> equipoTitular(){
 
+        //obtenemos la lista de todos los jugadores de la base de datos
         List<Jugador> jugadores = jugadoRepository.findAll();
+        //creamos una lista auxiliar para guardar el dto de cada jugador 
         List<JugadoresTitularesDto> promedios = new ArrayList<>();
 
+        //recorremos a cada jugador para procesar sus datos
         for (Jugador jugador : jugadores ) {
+
+            //consultamos los entrenos de los jugadores y los guardamos en una lista
             List<Entrenamiento> entrenamientos = entrenamientoRepository.findByJugadorId(jugador.getId());
 
+            //si el jugador no entreno 3 veces se rompe el sistema y enviamos una exception
             if (entrenamientos.size() < 3) {
                 throw new InformacionInsuficienteException("el jugador" + jugador.getName() + "no hizo los 3 entrenamientos");               
             }
 
+            //convertimos la lista entrenamients en un stream esto nos sirve manejar un flujo secuencial de objetos          
             double promedio = entrenamientos.stream()
+            /*ahora convertimo ese stream en un doubleStream haciendo referencia al resulatdo,
+            racticamente estamos sacando solo el resultado de todo los datos*/
             .mapToDouble(Entrenamiento::getResultado)
+            //sumamos los elementos y dividimos po el nuemro de elementos
             .average()
+            //un metodo que devuelve un valor por defecto que OptionalDouble
             .orElse(0);
 
             JugadoresTitularesDto response = new JugadoresTitularesDto();
