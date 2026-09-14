@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +16,7 @@ import com.entrenamiento.yers2.dto.EntrenamientoResponseDto;
 import com.entrenamiento.yers2.dto.JugadoresTitularesDto;
 import com.entrenamiento.yers2.service.EntrenamientoService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController 
@@ -26,7 +27,7 @@ public class EntrenamientoController {
     private final EntrenamientoService entrenamientoService;
 
     @PostMapping ("/create")
-    public ResponseEntity<EntrenamientoResponseDto> entrenamiento(@Validated @RequestBody EntrenamientoRequestDTO request){
+    public ResponseEntity<EntrenamientoResponseDto> entrenamiento(@Valid @RequestBody EntrenamientoRequestDTO request){
         EntrenamientoResponseDto response = entrenamientoService.crearEntrenamiento(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
